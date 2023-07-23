@@ -12,3 +12,4 @@ tauri = { version = "1.0.0-rc.5" }
 serde = "1.0"
 thiserror = "1.0"
 everything-rs = "0.1.9"
+ts-rs = "6.2.1"

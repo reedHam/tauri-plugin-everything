@@ -7,6 +7,7 @@ use tauri::{
 
 use everything_rs::{Everything, EverythingError, EverythingRequestFlags, EverythingSort};
 use std::sync::RwLock;
+use ts_rs::TS;
 
 #[derive(Debug, thiserror::Error)]
 pub enum Error {
@@ -63,7 +64,8 @@ async fn set_search<R: Runtime>(
     Ok(())
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, TS)]
+#[ts(export)]
 pub enum RequestFlags {
     FileName,
     Path,
