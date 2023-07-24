@@ -5,9 +5,7 @@ use tauri::{
     AppHandle, Manager, Runtime, State, Window,
 };
 
-use everything_rs::{
-    Everything, EverythingError, EverythingRequestFlags, EverythingResult, EverythingSort,
-};
+use everything_rs::{Everything, EverythingError, EverythingRequestFlags, EverythingSort};
 use std::sync::RwLock;
 use ts_rs::TS;
 
