@@ -1,0 +1,1 @@
+export declare type RequestFlags = "FileName" | "Path" | "FullPathAndFileName" | "Extension" | "Size" | "DateCreated" | "DateModified" | "DateAccessed" | "Attributes" | "FileListFileName" | "RunCount" | "DateRun" | "DateRecentlyChanged" | "HighlightedFileName" | "HighlightedPath" | "HighlightedFullPathAndFileName";

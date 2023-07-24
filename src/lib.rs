@@ -5,7 +5,9 @@ use tauri::{
     AppHandle, Manager, Runtime, State, Window,
 };
 
-use everything_rs::{Everything, EverythingError, EverythingRequestFlags, EverythingSort};
+use everything_rs::{
+    Everything, EverythingError, EverythingRequestFlags, EverythingResult, EverythingSort,
+};
 use std::sync::RwLock;
 use ts_rs::TS;
 
@@ -185,7 +187,7 @@ async fn get_num_results(
     state: State<'_, EverythingState>,
 ) -> Result<u32> {
     let ev = state.0.read()?;
-    Ok(ev.get_num_results())
+    Ok(ev.get_total_results())
 }
 
 #[command]
@@ -195,7 +197,13 @@ async fn get_full_path_results(
     state: State<'_, EverythingState>,
 ) -> Result<Vec<String>> {
     let ev = state.0.read()?;
-    Ok(ev.full_path_iter().flatten().collect())
+    let mut file_res = Vec::with_capacity(ev.get_max_results() as usize);
+    for file_path in ev.full_path_iter() {
+        if let Ok(file_path) = file_path {
+            file_res.push(file_path);
+        }
+    }
+    Ok(file_res)
 }
 
 #[command]
@@ -216,7 +224,13 @@ async fn get_file_name_results(
     state: State<'_, EverythingState>,
 ) -> Result<Vec<String>> {
     let ev = state.0.read()?;
-    Ok(ev.name_iter().flatten().collect())
+    let mut file_res = Vec::with_capacity(ev.get_max_results() as usize);
+    for file_name in ev.name_iter() {
+        if let Ok(file_name) = file_name {
+            file_res.push(file_name);
+        }
+    }
+    Ok(file_res)
 }
 
 #[command]
